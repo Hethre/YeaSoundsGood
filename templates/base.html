@@ -22,14 +22,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">SuperApp</a>
+        <a class="navbar-brand" href="/">YeaSoundsGood</a>
         <div class="nav-collapse">
           {% block navbar_right %}
           <ul class="nav navbar-nav pull-right">
             {% if not session.logged_in %}
-              <li><a href="#">Login or Signup</a></li>
+              <li><a href="/">Login or Signup</a></li>
             {% else %}
-              <li><a href="#">Logout</a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/upload">Upload</a></li>
+              <li><a href="/">Logout</a></li>
             {% endif %}
           </ul>
           {% endblock %}
@@ -45,7 +47,7 @@
         <hr>
         {% block footer %}
         <footer class="footer">
-            <p>&copy; SuperApp</p>
+            <p>&copy; YeaSoundsGood</p>
         </footer>
         {% endblock %}
     </div>

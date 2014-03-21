@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
 
@@ -23,17 +23,17 @@ app.config["MONGODB_DB"] = DB_NAME
 connect(DB_NAME, host='mongodb://' + DB_USERNAME + ':' + DB_PASSWORD + '@' + DB_HOST_ADDRESS)
 db = MongoEngine(app)
 
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    if request.method == "POST":
+      print("got post")
+      return render_template('404.html')
+    else:
+      return render_template('index.html')
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-
-@app.route("/createdb")
-def createdb():
-    user = User()
-    user.email = "test@soundsgood.com"
-    user.password = "yeas0undsg00d"
-    user.save()
-    return render_template('index.html')
 
 @app.route("/")
 def index():

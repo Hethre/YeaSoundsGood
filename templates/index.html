@@ -2,7 +2,13 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 {% if not session.logged_in %}
-     <p>You are not logged in.</p>
+     <form action="/profile">
+           <p>Add your voice to the community!</p>
+          <input type="text" name="email"/>
+          <input type="submit" name="submit" value="Create"/>
+          <p>Already have an account?</p>
+          <input type="submit" name="submit" value="Login"/>
+     </form>
 {% else %}
      <p>You are logged in.</p>
 {% endif %}
