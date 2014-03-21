@@ -26,8 +26,12 @@ db = MongoEngine(app)
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     if request.method == "POST":
-      print("got post")
-      return render_template('404.html')
+        if request.form["submit"] == "Create":
+            email = request.form["email"]
+            return render_template("profile.html", email=email)
+        elif request.form["submit"] == "Login":
+            email = request.form["email"]
+            return render_template("profile.html", email=email)
     else:
       return render_template('index.html')
 
