@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="petclinic:war">
+    <output-path>$PROJECT_DIR$/../yeasoundsgoodapp/target</output-path>
+    <root id="archive" name="petclinic-0.1.0.BUILD-SNAPSHOT.war">
+      <element id="artifact" artifact-name="petclinic:war exploded" />
+    </root>
+  </artifact>
+</component>
