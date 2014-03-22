@@ -48,7 +48,7 @@ def upload():
           sound.file_type = file_type
           sound.created = datetime.datetime.now()
           sound.save()
-          return redirect("/sound?file_name=%s" % file_name)
+          return "/sound?file_name=%s" % file_name
 
     return render_template('upload.html')
 
