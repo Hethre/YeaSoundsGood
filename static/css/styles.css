@@ -23,6 +23,23 @@ body {
   height: 200px;
 }
 
+.navbar {
+	background-color: #FFAE73;
+	border-color: #FFAE73;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-nav>li>a:hover, 
+.navbar-inverse .navbar-nav>li>a:focus {
+	color: #000000;
+}
+
 .content {
 	min-height: 450px;;
 }
@@ -80,12 +97,12 @@ body {
 }
 
 #login,
-#createAnAccount {
+#create-an-account {
 	display: none;
 }
 
-#alreadyHaveAccount:hover,
-#createAnAccount:hover {
+#already-have-account:hover,
+#create-an-account:hover {
 	cursor: pointer;
 }
 
@@ -112,7 +129,7 @@ body {
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
 	box-shadow: 0 1px 2px rgba(0,0,0,.05);
 	margin: 20px;
-	padding: 20px;	
+	padding: 15px;
 }
 
 #dashboard .sound-byte:hover {
@@ -135,12 +152,20 @@ body {
 
 #dashboard .sound-byte p {
 	text-align: center;
-	word-wrap: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #dashboard .sound-byte .play-btn {
 	margin: 10px auto;
 	width: 50%;
+	color: #5B4CD8;
+}
+
+#dashboard .sound-byte .play-btn:hover {
+	opacity: 0.8;
+	cursor: pointer;
+	color: #130873;
 }
 
 #dashboard .sound-byte .share {

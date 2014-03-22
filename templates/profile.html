@@ -10,7 +10,9 @@
 				<div class="col-md-3">
 					<div class="sound-byte">
 						<p>{{ sound.file_name }}</p>
-						<div class="play-btn"><i class="glyphicon glyphicon-play"></i></div>
+						<div class="play-btn">
+							<i class="glyphicon glyphicon-play" data-desc="{{sound.description}}" data-type="{{sound.file_type}}"></i>
+						</div>
 						<div class="share">
 							<i class="fa fa-facebook"></i>
 							<i class="fa fa-twitter"></i>
@@ -24,9 +26,11 @@
 	</div>
 
 	<div id="playback-panel">
-		<audio controls autoplay>
+		<!-- <audio controls autoplay>
 		Your browser does not support the audio element.
 		</audio>
+		<title></title>
+		<section></section> -->
 	</div>
 </div>
 
