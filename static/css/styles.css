@@ -13,6 +13,8 @@ body {
 	min-height: 450px;;
 }
 
+/* LOGIN / CREATE ACCOUNT FORM */
+
 .form-signin {
 	width: 50%;
 	margin: auto;
@@ -46,4 +48,52 @@ body {
 #alreadyHaveAccount:hover,
 #createAnAccount:hover {
 	cursor: pointer;
+}
+
+/* PROFILE PAGE */
+
+#profile {
+	background-color: #fff;
+	width: 80%;
+	margin: auto;
+	padding: 20px;
+	opacity: 0.98;
+}
+
+#dashboard-wrapper {
+	height: 100%;
+}
+
+#dashboard .sound-byte {
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	margin: 20px;
+	padding: 20px;	
+}
+
+#dashboard .sound-byte:hover {
+	-webkit-box-shadow: 0 0 5px 0 #bbb;
+    -moz-box-shadow: 0 0 5px 0 #bbb;
+    box-shadow: 0 0 5px 0 #bbb;
+}
+
+#dashboard .sound-byte i {
+	margin: auto;
+}
+
+#playback-panel {
+	background-color: #1E776D;
+	padding: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#playback-panel audio {
+	width: 100%;
 }

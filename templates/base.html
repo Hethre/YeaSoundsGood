@@ -11,9 +11,8 @@
 
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
     {% endblock %}
@@ -59,7 +58,11 @@
         {% endblock %}
     </div>
 
-    {% block js_footer %}{% endblock %}
+    {% block js_footer %}
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
 
   </body>
 </html>

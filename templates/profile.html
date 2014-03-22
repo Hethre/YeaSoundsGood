@@ -1,5 +1,79 @@
 {% extends "base.html" %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-<p>Welcome. Your email is {{ session.email }}</p>
+
+<div id="profile">
+	<h1>Welcome. Your email is {{ session.email }}</h1>
+
+	<div id="dashboard-wrapper">
+		<div id="dashboard" class="row">
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+		</div>
+
+		<div id="dashboard" class="row">
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="sound-byte">
+					<i class="glyphicon glyphicon-play"></i>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="playback-panel">
+		<audio controls>
+		Your browser does not support the audio element.
+		</audio>
+	</div>
+</div>
+
 {% endblock %}
