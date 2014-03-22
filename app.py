@@ -78,7 +78,8 @@ def profile():
                 user.password = "password"
                 user.save()
                 session["email"] = email
-                return render_template("profile.html")
+                sounds = user.get_sounds()
+                return render_template("profile.html", sounds=sounds)
             else:
                 return render_template('404.html'), 404
         # Log an existing user in.
@@ -89,7 +90,8 @@ def profile():
                 return render_template('404.html'), 404
             else:
                 session["email"] = email
-                return render_template("profile.html")
+                sounds = user.get_sounds()
+                return render_template("profile.html", sounds=sounds)
         # Log an existing user out.
         elif request.form["submit"] == "Logout":
             session["email"] = None
@@ -99,7 +101,9 @@ def profile():
             return render_template('404.html'), 404
     else:
       if session["email"]:
-          return render_template('profile.html')
+          user = User.get_user(session["email"])
+          sounds = user.get_sounds()
+          return render_template("profile.html", sounds=sounds)
       else:
           return render_template('index.html')
 

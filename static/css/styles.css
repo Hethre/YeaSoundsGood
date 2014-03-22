@@ -86,6 +86,22 @@ body {
 	margin: auto;
 }
 
+#dashboard .sound-byte .glyphicon-play {
+	font-size: 50px;
+}
+
+#dashboard .sound-byte .glyphicon-play:hover {
+	font-size: 50px;
+}
+
+#dashboard .sound-byte p {
+	text-align: center;
+}
+
+#dashboard .sound-byte .share {
+	font-size: 20px;
+}
+
 #playback-panel {
 	background-color: #1E776D;
 	padding: 20px;

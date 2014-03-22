@@ -16,6 +16,10 @@ class User(db.Document):
     else:
       raise Exception('Database Integrity Error')
 
+  def get_sounds(self):
+    sounds_found = Sound.objects(user=self)
+    return sounds_found
+
 class Sound(db.Document):
   user = db.ReferenceField(User)
   description = db.StringField()
