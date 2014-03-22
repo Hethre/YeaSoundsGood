@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, redirect, request, session
 from werkzeug.utils import secure_filename
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
@@ -48,9 +48,19 @@ def upload():
           sound.file_type = file_type
           sound.created = datetime.datetime.now()
           sound.save()
-          return render_template("sound.html", file_name=file_name)
+          return redirect("/sound?file_name=%s" % file_name)
 
     return render_template('upload.html')
+
+@app.route("/sound", methods=["GET", "POST"])
+def sound():
+    if request.method == "GET":
+        file_name = request.args["file_name"]
+        sound = Sound.get_sound(file_name)
+        if not sound:
+            return render_template('404.html'), 404
+        else:
+            return render_template("sound.html", sound=sound)
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
