@@ -152,6 +152,13 @@
 {#    dropArea.on('drop', dropEvent);#}
 {#    dropArea.on('dragover', dragOver);#}
   </script>
+
+
+   <p>Test Form Below</p>
+   <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file"/>
+      <input type="submit" value="Upload"/>
+    </form>
 {% endblock content %}
 
 
