@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
 
@@ -34,6 +34,7 @@ def profile():
                 user.email = email
                 user.password = "password"
                 user.save()
+                session["email"] = email
                 return render_template("profile.html", email=email)
             else:
                 return render_template('404.html'), 404
@@ -43,6 +44,7 @@ def profile():
             if not user:
                 return render_template('404.html'), 404
             else:
+                session["email"] = email
                 return render_template("profile.html", email=email)
     else:
       return render_template('index.html')
