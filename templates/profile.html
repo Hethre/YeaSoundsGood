@@ -3,76 +3,28 @@
 {% block content %}
 
 <div id="profile">
-	<h1>Welcome. Your email is {{ session.email }}</h1>
-  {% for sound in sounds %}
-    <p><a href="/sound?file_name={{ sound.file_name }}">{{ sound.file_name }}</a></p>
-  {%  endfor %}
 	<div id="dashboard-wrapper">
 		<div id="dashboard" class="row">
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
+
+			{% for sound in sounds %}
+				<div class="col-md-3">
+					<div class="sound-byte">
+						<p>{{ sound.file_name }}</p>
+						<div class="play-btn"><i class="glyphicon glyphicon-play"></i></div>
+						<div class="share">
+							<i class="fa fa-facebook"></i>
+							<i class="fa fa-twitter"></i>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
+  			{%  endfor %}
+			
 		</div>
 
-		<div id="dashboard" class="row">
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="sound-byte">
-					<i class="glyphicon glyphicon-play"></i>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div id="playback-panel">
-		<audio controls>
+		<audio controls autoplay>
 		Your browser does not support the audio element.
 		</audio>
 	</div>

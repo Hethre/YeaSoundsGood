@@ -1,13 +1,19 @@
-$('#alreadyHaveAccount').click(function() {
+$('#already-have-account').click(function() {
 	toggleLoginOrCreateAccount();
 	$(this).hide();
-	$('#createAnAccount').show();
+	$('#create-an-account').show();
 });
 
-$('#createAnAccount').click(function() {
+$('#create-an-account').click(function() {
 	toggleLoginOrCreateAccount();
 	$(this).hide();
-	$('#alreadyHaveAccount').show();
+	$('#already-have-account').show();
+});
+
+$('.sound-byte').click(function() {
+	var clipName = $(this).find('p').html();
+	var clipType = clipName.substr(clipName.indexOf(".") + 1);
+	$("#playback-panel audio").html("<source src='/soundfile/" + clipName + "' type='audio/" + clipType + "'>");
 });
 
 var toggleLoginOrCreateAccount = function () {
