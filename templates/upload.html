@@ -9,7 +9,7 @@
 
   <button id="record" type="button" class="btn btn-primary btn-lg">RECORD</button>
 
-  <canvas id="canvas" style="display: none"></canvas>
+  <br/><canvas id="canvas"></canvas>
 
   <script type="text/javascript">
     var dropArea = $('#dropArea');
@@ -27,7 +27,7 @@
     var xhr;
 
     $('#upload').click(function() {
-      dropArea.show();
+      dropArea.toggle();
     });
 
     function initAudio(data) {
@@ -98,39 +98,8 @@
           }
     }
 
-    dropArea.on('drop', function(evt) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        console.log("here")
-
-        var droppedFiles = evt.dataTransfer.files;
-
-        /*
-        var formData = new FormData();
-
-        for(var i = 0; i < droppedFiles.length; ++i) {
-            var file = droppedFiles[i];
-
-            files.append(file.name, file);
-        }
-
-        xhr = new XMLHttpRequest();
-        xhr.open("POST", settings.url);
-        xhr.onreadystatechange = handleResult;
-        xhr.send(formData);
-        */
-
-        var reader = new FileReader();
-
-        reader.onload = function(fileEvent) {
-            var data = fileEvent.target.result;
-            initAudio(data);
-        }
-
-        reader.readAsArrayBuffer(droppedFiles[0]);
-    });
-
-    function handleResult() {
+    function handleResult(request) {
+      console.log("done!")
         if (xhr.readyState == 4 /* complete */) {
             switch(xhr.status) {
                 case 200: /* Success */
@@ -143,14 +112,53 @@
         }
     }
 
-    dropArea.on("dragOver", function(evt) {
+    function dropEvent(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        console.log(evt)
+
+        var droppedFiles = evt.originalEvent.dataTransfer.files;
+{#        console.log(droppedFiles)#}
+
+{#        var formData = new FormData();#}
+{#        var files = [];#}
+{##}
+{#        for(var i = 0; i < droppedFiles.length; ++i) {#}
+{#          var file = droppedFiles[i];#}
+{##}
+{#          files.push(file.name, file);#}
+{#        }#}
+{##}
+{#        formData.append("files", files)#}
+{##}
+{#        xhr = new XMLHttpRequest();#}
+{#        xhr.open("POST", "/upload");#}
+{#        xhr.setRequestHeader("Content-type", "multipart/form-data");#}
+{#        xhr.setRequestHeader("Content-length", droppedFiles.length);#}
+{#        xhr.setRequestHeader("Connection", "close");#}
+{#        xhr.onreadystatechange = function() {#}
+{#          console.log("done")#}
+{#        };#}
+{#        xhr.send(formData);#}
+
+        var reader = new FileReader();
+
+        reader.onload = function(fileEvent) {
+            var data = fileEvent.target.result;
+            initAudio(data);
+        }
+
+        reader.readAsArrayBuffer(droppedFiles[0]);
+    }
+
+    function dragOver(evt) {
         evt.stopPropagation();
         evt.preventDefault();
         return false;
-    });
+    }
 
-{#    dropArea.on('drop', dropEvent);#}
-{#    dropArea.on('dragover', dragOver);#}
+    dropArea.on('drop', dropEvent);
+    dropArea.on('dragover', dragOver);
   </script>
 
 
