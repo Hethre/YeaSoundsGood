@@ -33,3 +33,9 @@ An example .git/config
 [remote "origin"]
   url = git@github.com:Hethre/YeaSoundsGood.git
   fetch = +refs/heads/*:refs/remotes/origin/*
+
+
+To see what's in our hosted database:
+Go to https://mongolab.com/databases/soundsgood
+username: yeasoundsgooddev
+password: yeas0undsg00d
