@@ -83,12 +83,12 @@ body {
 }
 
 #login,
-#createAnAccount {
+#create-an-account {
 	display: none;
 }
 
-#alreadyHaveAccount:hover,
-#createAnAccount:hover {
+#already-have-account:hover,
+#create-an-account:hover {
 	cursor: pointer;
 }
 
