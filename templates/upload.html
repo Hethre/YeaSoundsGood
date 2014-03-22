@@ -16,6 +16,19 @@
 
     <br/><div id="canvas-container" class="hide"><canvas id="canvas"></canvas></div>
 
+    <br/>
+      <div id="record-container" style="display: none">
+        <div id="viz">
+          <canvas id="analyser" width="500" height="200"></canvas>
+{#          <canvas id="wavedisplay" width="500" height="200"></canvas>#}
+        </div>
+
+        <i class="fa fa-microphone" style="font-size: 50px; padding: 20px 10px; color: #428bca;"></i>
+        <i id="record-start" class="glyphicon glyphicon-record" style="font-size: 30px; padding: 20px 10px; cursor: pointer;"></i>
+        <i id="record-stop" class="glyphicon glyphicon-stop disabled" style="font-size: 30px; padding: 20px 10px; cursor: pointer;"></i>
+      </div>
+    </div>
+
     <a id="next" href="" class="hide"><button id="next-button" type="button" class="btn btn-success btn-lg center-block">NEXT</button></a>
   </div>
 
@@ -24,8 +37,13 @@
 
 
 {% block js %}
+  {# Record audio from http://webaudiodemos.appspot.com/ #}
+  <script src="http://webaudiodemos.appspot.com/AudioRecorder/js/audiodisplay.js"></script>
+  <script src="http://webaudiodemos.appspot.com/AudioRecorder/js/recorderjs/recorder.js"></script>
+  <script src="http://webaudiodemos.appspot.com/AudioRecorder/js/main.js"></script>
 
   <script type="text/javascript">
+    {# Drag and drop upload code from: http://jsfiddle.net/gaJyT/18/ #}
     var dropArea = $('#dropArea');
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
@@ -40,8 +58,26 @@
     var analyser;
     var xhr;
 
+    var recordStart = $("#record-start");
+    var recordStop = $("#record-stop");
+
     $('#upload').click(function() {
       dropArea.toggle();
+      $("#record-container").hide();
+    });
+
+    $("#record").click(function() {
+      $("#record-container").toggle();
+    });
+
+    recordStart.click(function() {
+      recordStart.toggleClass("disabled");
+      recordStop.toggleClass("disabled");
+    });
+
+    recordStop.click(function() {
+      recordStart.toggleClass("disabled");
+      recordStop.toggleClass("disabled");
     });
 
     function initAudio(data) {
