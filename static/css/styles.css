@@ -1,5 +1,49 @@
+body {
+	background: #cccccc url('../images/banner.jpg') no-repeat center;
+	background-attachment:fixed;
+}
+
 #dropArea {
   height: 100px;
   width: 100px;
   border: 1px solid #888;
+}
+
+.content {
+	min-height: 450px;;
+}
+
+.form-signin {
+	width: 50%;
+	margin: auto;
+	padding: 10px 30px;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	opacity: 0.85;
+	-webkit-transition: opacity 1s; /* For Safari 3.1 to 6.0 */
+	transition: opacity 1s;
+}
+
+.form-signin:hover {
+	opacity: 1;
+}
+
+.form-signin .btn-container {
+	margin-top: 10px;
+}
+
+#login,
+#createAnAccount {
+	display: none;
+}
+
+#alreadyHaveAccount:hover,
+#createAnAccount:hover {
+	cursor: pointer;
 }
