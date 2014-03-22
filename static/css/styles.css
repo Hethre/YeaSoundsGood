@@ -96,10 +96,18 @@ body {
 
 #dashboard .sound-byte p {
 	text-align: center;
+	word-wrap: break-word;
+}
+
+#dashboard .sound-byte .play-btn {
+	margin: 10px auto;
+	width: 50%;
 }
 
 #dashboard .sound-byte .share {
 	font-size: 20px;
+	margin: auto;
+	width: 50%;
 }
 
 #playback-panel {
