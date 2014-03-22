@@ -37,6 +37,20 @@ body {
   margin-bottom: 20px;
 }
 
+#viz {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: space-around;
+  align-items: center;
+}
+
+.disabled {
+  color: #888;
+  cursor: default !important;
+}
+
 /* LOGIN / CREATE ACCOUNT FORM */
 
 .form-signin,
