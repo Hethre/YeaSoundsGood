@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, send_from_directory
 from werkzeug.utils import secure_filename
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
@@ -48,9 +48,13 @@ def upload():
           sound.file_type = file_type
           sound.created = datetime.datetime.now()
           sound.save()
-          return redirect("/sound?file_name=%s" % file_name)
+          return "/sound?file_name=%s" % file_name
 
     return render_template('upload.html')
+
+@app.route("/soundfile/<file_name>", methods=["GET"])
+def soundfile(file_name):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], file_name)
 
 @app.route("/sound", methods=["GET", "POST"])
 def sound():

@@ -13,7 +13,7 @@ $('#create-an-account').click(function() {
 $('.sound-byte').click(function() {
 	var clipName = $(this).find('p').html();
 	var clipType = clipName.substr(clipName.indexOf(".") + 1);
-	// $("#playback-panel audio").html("<source src='../../data/uploads/" + clipName + "' type='audio/" + clipType + "'>");
+	// $("#playback-panel audio").html("<source src='/sound?file_name=" + clipName + "' type='audio/" + clipType + "'>");
 });
 
 var toggleLoginOrCreateAccount = function () {

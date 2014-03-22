@@ -11,6 +11,12 @@
 
   <br/><canvas id="canvas"></canvas>
 
+  <a id="next" href="" class="hide">NEXT</a>
+{% endblock content %}
+
+
+{% block js %}
+
   <script type="text/javascript">
     var dropArea = $('#dropArea');
     var canvas = document.getElementById('canvas');
@@ -118,35 +124,24 @@
         console.log(evt)
 
         var droppedFiles = evt.originalEvent.dataTransfer.files;
-{#        console.log(droppedFiles)#}
+        var formData = new FormData();
+        formData.append("file", droppedFiles[0]);
 
-{#        var formData = new FormData();#}
-{#        var files = [];#}
-{##}
-{#        for(var i = 0; i < droppedFiles.length; ++i) {#}
-{#          var file = droppedFiles[i];#}
-{##}
-{#          files.push(file.name, file);#}
-{#        }#}
-{##}
-{#        formData.append("files", files)#}
-{##}
-{#        xhr = new XMLHttpRequest();#}
-{#        xhr.open("POST", "/upload");#}
-{#        xhr.setRequestHeader("Content-type", "multipart/form-data");#}
-{#        xhr.setRequestHeader("Content-length", droppedFiles.length);#}
-{#        xhr.setRequestHeader("Connection", "close");#}
-{#        xhr.onreadystatechange = function() {#}
-{#          console.log("done")#}
-{#        };#}
-{#        xhr.send(formData);#}
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", "/upload");
+        xhr.onreadystatechange = function(e) {
+          var nextLink = $('#next');
+          next.href = e.target.responseText;
+          nextLink.removeClass("hide");
+        };
+        xhr.send(formData);
 
         var reader = new FileReader();
 
         reader.onload = function(fileEvent) {
             var data = fileEvent.target.result;
             initAudio(data);
-        }
+        };
 
         reader.readAsArrayBuffer(droppedFiles[0]);
     }
@@ -160,13 +155,4 @@
     dropArea.on('drop', dropEvent);
     dropArea.on('dragover', dragOver);
   </script>
-
-
-   <p>Test Form Below</p>
-   <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="file"/>
-      <input type="submit" value="Upload"/>
-    </form>
-{% endblock content %}
-
-
+{% endblock %}
