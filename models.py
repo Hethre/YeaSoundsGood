@@ -15,3 +15,10 @@ class User(db.Document):
       return None
     else:
       raise Exception('Database Integrity Error')
+
+class Sound(db.Document):
+  user = db.ReferenceField(User)
+  description = db.StringField()
+  file_name = db.StringField()
+  file_type = db.StringField()
+  created = db.DateTimeField()
