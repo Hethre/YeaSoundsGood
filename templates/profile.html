@@ -5,7 +5,7 @@
 <div id="profile">
 	<h1>Welcome. Your email is {{ session.email }}</h1>
   {% for sound in sounds %}
-    <p>{{ sound.file_name }}</p>
+    <p><a href="/sound?file_name={{ sound.file_name }}">{{ sound.file_name }}</a></p>
   {%  endfor %}
 	<div id="dashboard-wrapper">
 		<div id="dashboard" class="row">
