@@ -23,6 +23,14 @@ app.config["MONGODB_DB"] = DB_NAME
 connect(DB_NAME, host='mongodb://' + DB_USERNAME + ':' + DB_PASSWORD + '@' + DB_HOST_ADDRESS)
 db = MongoEngine(app)
 
+@app.route("/upload", methods=["GET", "POST"])
+def upload():
+    if request.method == "POST":
+      print("got post")
+      return render_template("404.html")
+
+    return render_template('upload.html')
+
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     if request.method == "POST":

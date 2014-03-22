@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %} - Upload{% endblock %}
+{% block content %}
+  <h1>UPLOAD</h1>
+
+  <div id="dropArea" style="display: none">drag and drop file to upload</div>
+
+  <button id="upload" type="button" class="btn btn-primary btn-lg">UPLOAD</button>
+
+  <button id="record" type="button" class="btn btn-primary btn-lg">RECORD</button>
+
+  <canvas id="canvas" style="display: none"></canvas>
+
+  <script type="text/javascript">
+    var dropArea = $('#dropArea');
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    const CANVAS_HEIGHT = canvas.height;
+    const CANVAS_WIDTH = canvas.width;
+    const SPACER_WIDTH = 1;
+    const COL_WIDTH = 3;
+
+    var context = new (window.AudioContext || window.webkitAudioContext)();
+    var source;
+    var processor;
+    var analyser;
+    var xhr;
+
+    $('#upload').click(function() {
+      dropArea.show();
+    });
+
+    function initAudio(data) {
+        source = context.createBufferSource();
+
+        if(context.decodeAudioData) {
+            context.decodeAudioData(data, function(buffer) {
+                source.buffer = buffer;
+                createAudio();
+            }, function(e) {
+                console.log(e);
+            });
+        } else {
+            source.buffer = context.createBuffer(data, false /*mixToMono*/);
+            createAudio();
+           }
+
+
+    }
+
+    function createAudio() {
+        processor = context.createJavaScriptNode(2048 /*bufferSize*/, 1 /*num inputs*/, 1 /*num outputs*/);
+        processor.onaudioprocess = processAudio;
+
+        analyser = context.createAnalyser();
+
+        source.connect(context.destination);
+        source.connect(analyser);
+
+        analyser.connect(processor);
+        processor.connect(context.destination);
+
+        source.noteOn(0);
+        setTimeout(disconnect, source.buffer.duration * 1000 +1000);
+    }
+
+    function disconnect() {
+        source.noteOff(0);
+        source.disconnect(0);
+        processor.disconnect(0);
+        analyser.disconnect(0);
+    }
+
+    function processAudio(e) {
+        var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+
+        analyser.getByteFrequencyData(freqByteData);
+
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        var colors = [
+            '#3369E8', // blue
+            '#D53225', // red
+            '#EEB211', // yellow
+            '#009939' // green
+          ];
+
+        for (var i = 0; i < freqByteData.length; ++i) {
+
+            var magnitude = freqByteData[i];
+            var lingrad = ctx.createLinearGradient(0, CANVAS_HEIGHT, 0, CANVAS_HEIGHT - magnitude);
+
+            lingrad.addColorStop(0, colors[i % colors.length]);
+            lingrad.addColorStop(1, colors[i % colors.length]);
+            ctx.fillStyle = lingrad;
+
+            ctx.fillRect(i * SPACER_WIDTH, CANVAS_HEIGHT, COL_WIDTH, -magnitude);
+          }
+    }
+
+    dropArea.on('drop', function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        console.log("here")
+
+        var droppedFiles = evt.dataTransfer.files;
+
+        /*
+        var formData = new FormData();
+
+        for(var i = 0; i < droppedFiles.length; ++i) {
+            var file = droppedFiles[i];
+
+            files.append(file.name, file);
+        }
+
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", settings.url);
+        xhr.onreadystatechange = handleResult;
+        xhr.send(formData);
+        */
+
+        var reader = new FileReader();
+
+        reader.onload = function(fileEvent) {
+            var data = fileEvent.target.result;
+            initAudio(data);
+        }
+
+        reader.readAsArrayBuffer(droppedFiles[0]);
+    });
+
+    function handleResult() {
+        if (xhr.readyState == 4 /* complete */) {
+            switch(xhr.status) {
+                case 200: /* Success */
+                    initAudio(request.response);
+                    break;
+                default:
+                    break;
+            }
+            xhr = null;
+        }
+    }
+
+    dropArea.on("dragOver", function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        return false;
+    });
+
+{#    dropArea.on('drop', dropEvent);#}
+{#    dropArea.on('dragover', dragOver);#}
+  </script>
+{% endblock content %}
+
+
