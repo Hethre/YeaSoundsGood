@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
 import datetime
+from pydub import AudioSegment
 
 from models import User, Sound
 
@@ -65,6 +66,13 @@ def sound():
             return render_template('404.html'), 404
         else:
             return render_template("sound.html", sound=sound)
+    elif request.method == "POST":
+        file_name = request.form["file_name"]
+        soundfile = AudioSegment.from_wav(os.path.join(app.config["UPLOAD_FOLDER"], file_name))
+        soundfile = soundfile.reverse()
+        soundfile.export(os.path.join(app.config["UPLOAD_FOLDER"], file_name), format="wav")
+        return redirect("/sound?file_name=%s" % file_name)
+
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():

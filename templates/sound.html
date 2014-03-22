@@ -7,4 +7,8 @@
 <p>Creator: {{ sound.user.email }}</p>
 <p>Created: {{ sound.created }}</p>
 <p>Filters:</p>
+<form action="/sound" method="POST">
+    <input type="hidden" name="file_name" value="{{ sound.file_name }}"/>
+    <input type="submit" value="Filter"/>
+</form>
 {% endblock %}
