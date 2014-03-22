@@ -26,7 +26,7 @@
         <div class="nav-collapse">
           {% block navbar_right %}
           <ul class="nav navbar-nav pull-right">
-            {% if not session.logged_in %}
+            {% if not session.email %}
               <li><a href="/">Login or Signup</a></li>
             {% else %}
               <li><a href="/profile">Profile</a></li>

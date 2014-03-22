@@ -2,4 +2,5 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 <p>Your email is {{ email }}</p>
+{%  if session.email %} test {% endif %}
 {% endblock %}
