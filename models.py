@@ -22,3 +22,13 @@ class Sound(db.Document):
   file_name = db.StringField()
   file_type = db.StringField()
   created = db.DateTimeField()
+
+  @staticmethod
+  def get_sound(file_name):
+    sounds_found = Sound.objects(file_name=file_name)
+    if len(sounds_found) == 1:
+      return sounds_found[0]
+    elif len(sounds_found) == 0:
+      return None
+    else:
+      raise Exception('Database Integrity Error')

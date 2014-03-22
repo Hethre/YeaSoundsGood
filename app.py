@@ -3,8 +3,9 @@ from flask import Flask, render_template, request, session
 from werkzeug.utils import secure_filename
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
+import datetime
 
-from models import User
+from models import User, Sound
 
 DB_NAME = "soundsgood"
 DB_USERNAME = "yeasoundsgooddev"
@@ -31,13 +32,23 @@ db = MongoEngine(app)
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "POST":
-      file = request.files["file"]
-      file_name = file.filename
-      file_type = file_name.rsplit(".", 1)[1]
-      if file and "." in file_name and file_type in ALLOWED_EXTENSIONS:
-        file_name = secure_filename(file_name)
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], file_name))
-        return render_template("sound.html", file_name=file_name)
+        file = request.files["file"]
+        file_name = file.filename
+        sound = Sound.get_sound(file_name)
+        if not sound:
+          sound = Sound()
+        file_type = file_name.rsplit(".", 1)[1]
+        if file and "." in file_name and file_type in ALLOWED_EXTENSIONS:
+          file_name = secure_filename(file_name)
+          file.save(os.path.join(app.config["UPLOAD_FOLDER"], file_name))
+          user = User.get_user(session["email"])
+          sound.user = user
+          sound.description = "this is a sound"
+          sound.file_name = file_name
+          sound.file_type = file_type
+          sound.created = datetime.datetime.now()
+          sound.save()
+          return render_template("sound.html", file_name=file_name)
 
     return render_template('upload.html')
 
