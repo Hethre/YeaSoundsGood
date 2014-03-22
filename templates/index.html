@@ -2,12 +2,25 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 {% if not session.email %}
-     <form action="/profile" method="POST">
-           <p>Add your voice to the community!</p>
-          <input type="text" name="email"/>
-          <input type="submit" name="submit" value="Create"/>
-          <p>Already have an account?</p>
-          <input type="submit" name="submit" value="Login"/>
+     <form action="/profile" method="POST" class="form-signin" role="form">
+      <h2>Add your voice to the community!</h2>
+      <div>
+          <input type="text" name="email" class="form-control" placeholder="Email Address" required="" autofocus=""/>
+      </div>
+      <div class="btn-container">
+          <button class="btn btn-lg btn-primary btn-block create-account" type="submit" name="submit" value="Create">Create</button>
+      </div>
+
+      <div id="login">
+        <input type="password" class="form-control" placeholder="Password" required="">
+        <label class="checkbox">
+	      <input type="checkbox" value="remember-me"> Remember me
+	    </label>
+        <button class="btn btn-lg btn-primary btn-block login" type="submit" name="submit" value="Login">Login</button>
+  	  </div>
+
+      <a id="alreadyHaveAccount">Already have an account?</a>
+      <a id="createAnAccount">Create an account</a>
      </form>
 {% else %}
      <p>You are logged in.</p>
