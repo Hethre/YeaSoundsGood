@@ -2,6 +2,7 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 <p>Your sound file is {{ sound.file_name }}</p>
+<p><a href="/soundfile/{{ sound.file_name }}">Sound Link</a></p>
 <p>File Type: {{ sound.file_type }}</p>
 <p>Description: {{ sound.description }}</p>
 <p>Creator: {{ sound.user.email }}</p>

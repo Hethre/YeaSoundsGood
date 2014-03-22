@@ -55,7 +55,9 @@ def upload():
 
 @app.route("/soundfile/<file_name>", methods=["GET"])
 def soundfile(file_name):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], file_name)
+    response = send_from_directory(app.config['UPLOAD_FOLDER'], file_name)
+    response.headers["Cache-Control"] = "no-cache, max-age=0"
+    return response
 
 @app.route("/sound", methods=["GET", "POST"])
 def sound():
