@@ -39,7 +39,7 @@ def profile():
                 user.password = "password"
                 user.save()
                 session["email"] = email
-                return render_template("profile.html", email=email)
+                return render_template("profile.html")
             else:
                 return render_template('404.html'), 404
         # Log an existing user in.
@@ -50,7 +50,7 @@ def profile():
                 return render_template('404.html'), 404
             else:
                 session["email"] = email
-                return render_template("profile.html", email=email)
+                return render_template("profile.html")
         # Log an existing user out.
         elif request.form["submit"] == "Logout":
             session["email"] = None
@@ -59,7 +59,10 @@ def profile():
         else:
             return render_template('404.html'), 404
     else:
-      return render_template('index.html')
+      if session["email"]:
+          return render_template('profile.html')
+      else:
+          return render_template('index.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
