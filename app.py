@@ -26,8 +26,12 @@ db = MongoEngine(app)
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     if request.method == "POST":
+        # Create a brand new account.
         if request.form["submit"] == "Create":
             email = request.form["email"]
+            # Make sure an email is provided.
+            if not email:
+                return render_template('404.html'), 404
             user = User.get_user(email)
             if not user:
                 user = User()
@@ -38,6 +42,7 @@ def profile():
                 return render_template("profile.html", email=email)
             else:
                 return render_template('404.html'), 404
+        # Log an existing user in.
         elif request.form["submit"] == "Login":
             email = request.form["email"]
             user = User.get_user(email)
@@ -46,6 +51,13 @@ def profile():
             else:
                 session["email"] = email
                 return render_template("profile.html", email=email)
+        # Log an existing user out.
+        elif request.form["submit"] == "Logout":
+            session["email"] = None
+            return render_template('index.html')
+
+        else:
+            return render_template('404.html'), 404
     else:
       return render_template('index.html')
 

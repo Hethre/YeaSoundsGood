@@ -11,5 +11,8 @@
      </form>
 {% else %}
      <p>You are logged in.</p>
+     <form action="/profile" method="POST">
+          <input type="submit" name="submit" value="Logout"/>
+     </form>
 {% endif %}
 {% endblock %}
