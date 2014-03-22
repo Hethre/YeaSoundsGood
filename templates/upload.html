@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block title %} - Upload{% endblock %}
 {% block content %}
-  <h1>UPLOAD</h1>
+  <div id="upload-form">
+    <h2>Upload your file</h2>
 
-  <div id="dropArea" style="display: none">drag and drop file to upload</div>
+    <div id="dropArea" style="display: none">
+      <h3>drag and drop your file here to preview</h3>
+    </div>
 
-  <button id="upload" type="button" class="btn btn-primary btn-lg">UPLOAD</button>
+    <div id="button-container" class="center-block">
+      <button id="upload" type="button" class="btn btn-primary btn-lg" style="margin-right: 50px;">Upload</button>
 
-  <button id="record" type="button" class="btn btn-primary btn-lg">RECORD</button>
+      <button id="record" type="button" class="btn btn-primary btn-lg">Record</button>
+    </div>
 
-  <br/><canvas id="canvas"></canvas>
+    <br/><div id="canvas-container" class="hide"><canvas id="canvas"></canvas></div>
 
-  <a id="next" href="" class="hide">NEXT</a>
+    <a id="next" href="" class="hide"><button id="next-button" type="button" class="btn btn-success btn-lg center-block">NEXT</button></a>
+  </div>
+
+
 {% endblock content %}
 
 
@@ -121,7 +129,8 @@
     function dropEvent(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        console.log(evt)
+        dropArea.css("background-color", "#f0ad4e");
+        $("#canvas-container").removeClass("hide");
 
         var droppedFiles = evt.originalEvent.dataTransfer.files;
         var formData = new FormData();
@@ -149,6 +158,7 @@
     function dragOver(evt) {
         evt.stopPropagation();
         evt.preventDefault();
+        dropArea.css("background-color", "#5bc0de");
         return false;
     }
 
